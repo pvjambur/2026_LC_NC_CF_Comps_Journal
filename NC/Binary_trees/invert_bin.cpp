@@ -10,6 +10,7 @@
  * };
  */
 //invert the binary tree
+//dfs
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
@@ -19,5 +20,13 @@ public:
         root->left=right;
         root->right=left;
         return root;
+    }
+};
+
+//bfs
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        
     }
 };
