@@ -15,20 +15,29 @@ int main(){
             cin>>x;
             allow[x]=1;
         }
-        long long neg=-(1LL<<60);
-        long long same=0;
-        long long flip=neg;
-        for(int i=1;i<=n;i++){
-            long long nsame=same+a[i];
-            long long nflip=flip-a[i];
+        long long dp0=0;
+        long long dp1=0;
+        bool ready=false;
+        for(int i=n;i>=1;i--){
+            long long temp0,temp1;
             if(allow[i]){
-                nsame=max(nsame,flip+a[i]);
-                nflip=max(nflip,same-a[i]);
+                long long best;
+                if(ready) best=max(dp0,dp1);
+                else best=dp0;
+                temp0=best+a[i];
+                temp1=best-a[i];
+                ready=true;
+            } else {
+                temp0=dp0+a[i];
+                temp1=dp1-a[i];
             }
-            same=nsame;
-            flip=nflip;
+            dp0=temp0;
+            dp1=temp1;
         }
-        cout<<max(same,flip)<<endl;
+        long long ans;
+        if(ready) ans=max(dp0,dp1);
+        else ans=dp0;
+        cout<<ans<<endl;
     }
     return 0;
 }
